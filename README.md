@@ -1,83 +1,86 @@
 # AutoSpare Inventory System (C++)
 
-Simple inventory management system made for Typical Auto Mobile Spareparts Shop in C++.  
-Built it to handle product sales, customer details, loyalty points, and track profit — mainly for an auto spare parts shop use case.
+A simple inventory management system built in C++ for a typical automobile spare parts shop.  
+It manages product sales, customer data, loyalty points, and profit tracking through a command-line interface.
 
 ---
 
-## 🎯 Project Objective
+## Project Objective
 
 To build a basic system that:
-- Stores and displays items
-- Handles item sales with stock reduction
-- Adds customers and tracks how much they’ve spent
-- Gives loyalty points (esp. for mechanics)
-- Calculates the overall profit made
+- Stores and displays inventory items
+- Handles item sales and stock reduction
+- Maintains customer details and spending
+- Awards loyalty points (especially for mechanics)
+- Calculates daily/overall profit
 
 ---
 
-## 🔧 Tech Stack
+## Tech Stack
 
-- **Language**: C++ (compiled with G++)
-- **File Handling**: CSV for storing and loading data
-- **Interface**: Just a CLI menu (no GUI)
+- **Language**: C++ (compiled using G++)
+- **Data Handling**: CSV files (read/write)
+- **Interface**: CLI-based menu system
 - **Environment**: VS Code + g++ (Windows)
 
 ---
 
-## 🛠 Tools Used
+## Tools Used
 
 - g++ compiler  
-- VS Code  
-- Excel (for editing the CSV manually sometimes)  
-- Git & GitHub (for version control)
+- Visual Studio Code  
+- Microsoft Excel (for occasional CSV edits)  
+- Git & GitHub (version control)
 
 ---
 
-## 📘 What I Learnt
+## What I Learned
 
-- Proper use of classes and arrays in C++
-- Reading/writing to CSV files
-- Using `getline`, `cin.ignore()`, and fixing input bugs
-- How to simulate real-world logic like customers, stock, sales, etc.
-- Debugging small, annoying logic issues that take forever to find 😑
-
----
-
-## 😤 Challenges Faced
-
-- CSV parsing kept breaking at first because of bad data or blank lines  
-- Accidentally looped the wrong way while checking product IDs (classic logic bug)  
-- Mixing `cin` with `getline()` caused annoying input handling issues  
-- Handling `stoi()` and `stof()` safely — they kept throwing exceptions on malformed CSV lines  
-- Keeping customer type logic separate while calculating loyalty points without mixing it up
+- Object-oriented design in C++ using classes and arrays
+- File I/O with `fstream` for persistent data storage
+- Handling `cin`, `getline()`, `cin.ignore()` without input bugs
+- Error handling with `stoi()` / `stof()` and `try-catch`
+- Simulating real-world business logic in code
+- Debugging input loops and logic branches patiently
 
 ---
 
-## 🌱 Future Scope
+## Challenges Faced
 
-- Add login for admin (just basic password-based)
-- Add search bar for product name / ID
-- Maybe use JSON instead of CSV later
-- GUI in the future? Maybe Qt or Python + C++ backend
-- Export profit reports per day/month
-
----
-
-## 📜 License
-
-MIT — free to use, copy, or modify. Just don’t claim you wrote it from scratch if you didn’t 😄
+- CSV parsing kept failing due to blank lines or malformed data  
+- Accidentally iterated the wrong way while validating product IDs  
+- Mixing `cin` with `getline()` caused unexpected bugs  
+- `stoi()` and `stof()` threw exceptions on bad CSV rows  
+- Keeping customer type logic and loyalty point calculations consistent
 
 ---
 
-## 👨‍💻 Author
+## Future Scope
 
-**Arunesh E**
-Electrcial and Electronics Engineering Student, SASTRA Deemed University  
-Exploring C++,Java and Data Analytics  
-Intersted in Building real-world, logic-driven systems that solve practical problems   
-2005arunesh@gmail.com  
-+91 9789834211  
+- Add password-protected admin login  
+- Product search by ID or name  
+- Switch to JSON or SQLite for better data handling  
+- GUI (maybe Qt or Python with C++ backend)  
+- Monthly/weekly profit report generation  
+
+---
+
+## License
+
+Licensed under the **MIT License** — feel free to use, modify, or distribute with attribution.  
+Please don’t claim the original work as your own.
+
+---
+
+## Author
+
+**Arunesh E**  
+Electrical and Electronics Engineering Student, SASTRA Deemed University  
+Exploring C++, Java, and Data Analytics  
+Interested in building real-world, logic-driven systems that solve practical problems  
+
+📧 2005arunesh@gmail.com  
+📱 +91 97898 34211  
 🔗 [LinkedIn](https://www.linkedin.com/in/arunesh33/)
 
-**Made this project to learn, mess up, fix it, and learn again.**
+> *Made this project to learn, mess up, fix it, and learn again.*
