@@ -1,0 +1,21 @@
+ID,Name,Brand,DealerID,Qty,CostPrice,SellPrice
+101,Engine Oil (1L),Castrol,201,50,250.00,300.00
+102,Brake Pads (Front),Bosch,202,20,800.00,1000.00
+103,Air Filter,Mahle,203,35,150.00,200.00
+104,Spark Plug (Single),NGK,204,60,120.00,180.00
+105,Battery 12V/35Ah,Exide,205,10,2400.00,2800.00
+106,Wiper Blade Set,Bosch,206,25,400.00,500.00
+107,Clutch Cable,TVS,202,15,350.00,450.00
+108,Coolant (1L),Motul,201,40,180.00,230.00
+109,Headlight Bulb H4,Philips,207,70,90.00,150.00
+110,Fuel Filter,Delphi,203,30,250.00,320.00
+111,Engine Air Intake Hose,Gates,202,20,350.00,450.00
+112,Radiator Fan Assembly,Valeo,204,10,1800.00,2200.00
+113,Timing Belt Kit,Continental,203,15,1200.00,1500.00
+114,Rear Brake Shoes,TVS,202,30,600.00,750.00
+115,Oil Filter,Bosch,201,48,100.00,150.00
+116,Fog Light Lamp Assembly,Philips,207,25,900.00,1200.00
+117,Rear View Mirror (Manual),Uno Minda,208,18,450.00,600.00
+118,Engine Mounting Bracket,Mahle,204,12,800.00,1050.00
+119,Wheel Bearing Kit (Front),SKF,203,22,750.00,950.00
+120,Cabin Air Filter,Mann-Filter,201,40,220.00,300.00
