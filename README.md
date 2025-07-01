@@ -65,6 +65,16 @@ To build a basic system that:
 
 ---
 
+## 🚀 How to Run This Project in GitHub Codespaces
+
+1. Open this repo in GitHub Codespaces or GitPod.
+2. Compile the code:
+   ```bash
+   g++ Automobile_Spare_Parts_IMS.cpp -o new
+3. And run as
+     ./new
+---
+
 ## License
 
 Licensed under the **MIT License** — feel free to use, modify, or distribute with attribution.  
