@@ -6,8 +6,8 @@
 #include <iomanip>
 using namespace std;
 
-const int MAX_ITEMS = 500;
-const int MAX_CUSTOMERS = 500;
+const int MAX_ITEMS = 1000;
+const int MAX_CUSTOMERS = 1000;
 
 class item
 {
@@ -20,24 +20,24 @@ class item
         float costprice;
         float sellingprice;
 
-    void getInput()
-   {
-        cout<< "Enter ID - ";
-        cin>>id;
-        cin.ignore();  // Clear newline before getline
-        cout << "Name - ";
-        cin.getline(name, 100);
-        cout << "Manufacturer - ";
-        cin.getline(manufacturer, 100);
-        cout<< "Supplying Dealer - ";
-        cin>>dealer_id;
-        cout<< "Quantity of the Item - ";
-        cin>> quantity;
-        cout<< "Costing Price - ";
-        cin>> costprice;
-        cout<< "Selling Price - ";
-        cin>> sellingprice;
-        }
+void getInput(int new_id)
+{
+    id = new_id;
+    cin.ignore();
+    cout << "   Name - ";
+    cin.getline(name, 100);
+    cout << "   Manufacturer - ";
+    cin.getline(manufacturer, 100);
+    cout << "    Supplying Dealer - ";
+    cin >> dealer_id;
+    cout << "    Quantity of the Item - ";
+    cin >> quantity;
+    cout << "    Costing Price - ";
+    cin >> costprice;
+    cout << "    Selling Price - ";
+    cin >> sellingprice;
+    cin.ignore();
+}
 
     void putoutput()
     {
@@ -59,7 +59,6 @@ class customer
         char name[50];
         char mobile[15];
         int type;
-        char custype[20];
         float totalspent;
         int loyalpoints;
         bool reward;
@@ -81,7 +80,7 @@ class customer
                 if (loyalpoints > 2000 && !reward)
                 {
                     reward = true;
-                    cout << "You can get Reward upto Rs. " << (loyalpoints/5);
+                    cout << "   You can get Reward upto Rs. " << (loyalpoints/5);
                 }
                 
             }
@@ -89,11 +88,14 @@ class customer
 
         void display()
         {
-            if (type == 1)
-                strcpy(custype, "Mechanic");
-            else
-                strcpy(custype, "Common Customer");
-
+            string custype;
+            if (type == 1) 
+            {
+                custype = "Mechanic";
+            } else 
+            {
+                custype = "Common Customer";
+            }
             cout << left << setw(25) << name
                 << setw(15) << mobile
                 << setw(20) << custype
@@ -113,7 +115,7 @@ class Autospareparts
     float total_selled_cp = 0;
     float total_selled_sp =0;
     public:
-        Autospareparts()
+        void initItemdata()
         {
             int ids[MAX_ITEMS] ;
             string names[MAX_ITEMS];
@@ -123,47 +125,48 @@ class Autospareparts
             float costPrices[MAX_ITEMS] ;
             float sellPrices[MAX_ITEMS] ;
 
+
             ifstream fin("Items_data.csv");
             if (!fin.is_open()) 
             {
-                cout << "Error: Could not open file Items_data.csv\n";
+                cout << "   Error: Could not open file Items_data.csv\n";
                 return;
             }
-            string line;
+            string item_line;
             int i = 0;
-            if (!getline(fin, line)) 
+            if (!getline(fin, item_line)) 
             {
-                cout << "Error: CSV file is empty or invalid format.\n";
+                cout << "   Error: CSV file is empty or invalid format.\n";
                 return;
             }
 
-            while (getline(fin, line) && i < MAX_ITEMS) 
+            while (getline(fin, item_line) && i < MAX_ITEMS) 
             {
-                stringstream ss(line);
+                stringstream iL(item_line);
                 string temp;
 
                 try {
-                    getline(ss, temp, ',');
+                    getline(iL, temp, ',');
                     ids[i] = stoi(temp);
 
-                    getline(ss, names[i], ',');
+                    getline(iL, names[i], ',');
 
-                    getline(ss, brands[i], ',');
+                    getline(iL, brands[i], ',');
 
-                    getline(ss, temp, ',');
+                    getline(iL, temp, ',');
                     dealers_id[i] = stoi(temp);
 
-                    getline(ss, temp, ',');
+                    getline(iL, temp, ',');
                     qty[i] = stoi(temp);
 
-                    getline(ss, temp, ',');
+                    getline(iL, temp, ',');
                     costPrices[i] = stof(temp);
 
-                    getline(ss, temp, ',');
+                    getline(iL, temp, ',');
                     sellPrices[i] = stof(temp);
                 } catch (...) {
-                    cerr << "Warning: Skipping invalid line in CSV (line " << i+2 << ")\n";
-                    cerr << "Line content: " << line << endl;
+                    cerr << "   Warning: Skipping invalid item_line in CSV (item_line " << i+2 << ")\n";
+                    cerr << "   item_line content: " << item_line << endl;
                     continue;
                 }
                 i++;
@@ -181,12 +184,121 @@ class Autospareparts
                 items[i].sellingprice = sellPrices[i];
             }
         }
+    
+        void initCustomerdata()
+        {
+            string name[MAX_CUSTOMERS];
+            string mobile[MAX_CUSTOMERS];
+            int type[MAX_CUSTOMERS];
+            float totalspent[MAX_CUSTOMERS];
+            int loyalpoints[MAX_CUSTOMERS];
+            bool reward[MAX_CUSTOMERS];
+
+            ifstream fin("customer_data.csv");
+            if (!fin.is_open()) 
+            {
+                cout << "   Error: Could not open file Customer_data.csv\n";
+                return;
+            }
+            string customer_line;
+            int i = 0;
+
+            if (!getline(fin, customer_line)) 
+            {
+                cout << "   Error: CSV file is empty or invalid format.\n";
+                return;
+            }
+            while (getline(fin, customer_line) && i < MAX_ITEMS) 
+            {
+                stringstream cL(customer_line);
+                string temp;
+
+                try
+                {
+                    getline(cL, name[i], ',');
+                    getline(cL, mobile[i], ',');
+                    getline(cL, temp, ',');
+                    type[i]= stoi(temp);
+                    getline(cL, temp, ',');
+                    totalspent[i]= stof(temp);
+                    getline(cL, temp, ',');
+                    loyalpoints[i]= stoi(temp);
+                    getline(cL, temp, ',');
+                    if (temp == "1" || temp == "true" || temp == "TRUE")
+                        reward[i] = true;
+                    else if (temp == "0" || temp == "false" || temp == "FALSE")
+                        reward[i] = false;
+                }
+                catch (...) 
+                {
+                    cerr << "   Warning: Skipping invalid customer_line in CSV (customer_line " << i+2 << ")\n";
+                    cerr << "   customer_line content: " << customer_line << endl;
+                    continue;
+                }
+                i++;
+            }
+            customercount = i;
+        
+            for (int i = 0 ; i < customercount; i++)
+            {
+                strcpy(customers[i].name, name[i].c_str());
+                strcpy(customers[i].mobile, mobile[i].c_str());
+                customers[i].type = type[i];
+                customers[i].totalspent = totalspent[i];
+                customers[i].loyalpoints = loyalpoints[i];
+                customers[i].reward = reward[i];
+            }
+        }
+
+        Autospareparts()
+        {
+            initItemdata();
+            initCustomerdata();
+        }
+
+        void deleteitem()
+        {
+            int delId;
+            bool found = false;
+            cout<<"Enter the Product ID- ";
+            cin>>delId;
+            for (int i =0 ; i<itemcount; i++)
+            {
+                if (items[i].id == delId)
+                {
+                    found = true;
+                    for (int j = i; j < itemcount - 1; j++)
+                    {
+                        items[j] = items[j + 1];
+                    }
+                    itemcount--;                
+                }
+            }
+            if (found==0)
+            {
+                cout<<"Item is not Available! ";
+                return;
+            }
+        }
 
         void addItem()
         {
-            items[itemcount].getInput();
+            int new_qty;
+            int new_id;
+            cout << "Enter ID - ";
+            cin >> new_id;
+            for (int i = 0; i < itemcount; ++i) 
+            {
+                if (items[i].id == new_id) {
+                    cout<<"Enter the Quantity- ";
+                    cin>>new_qty;
+                    items[i].quantity += new_qty;
+                    return;
+                }
+            }
+            items[itemcount].getInput(new_id);
             itemcount++;
-            cout<<"Product added Successfully !";
+            cout<<"     Product added Successfully !";
         }
 
         void displayItems()
@@ -196,15 +308,15 @@ class Autospareparts
                 cout << "NO Products are available !";
                 return;
             }
-            cout << "\n-----------AUTOMOBILE SPARE PARTS-----------\n";
-            cout << left << setw(10) << "Prod ID"
+            cout << "   \n-----------AUTOMOBILE SPARE PARTS-----------\n";
+            cout << left <<"    "<< setw(10) << "Prod ID"
                 << setw(25) << "Name"
                 << setw(20) << "Brand"
                 << setw(12) << "Dealer ID"
                 << setw(10) << "Qty"
                 << setw(12) << "Cost Price"
                 << setw(12) << "Sell Price" << endl;
-            cout << string(106, '-') << endl;  // separator line       
+            cout << string(106, '-') << endl;
 
             for (int i = 0; i < itemcount; i++)
             {
@@ -231,8 +343,8 @@ class Autospareparts
 
         void errormsg()
         {
-            cout << "The Product ID you've entered is not available in stock!\n";
-            cout << "Please enter a valid Product ID.\n";
+            cout << "   The Product ID you've entered is not available in stock!\n";
+            cout << "   Please enter a valid Product ID.\n";
         }
 
 
@@ -243,29 +355,29 @@ class Autospareparts
             bool itemthere = false;
             int id, qty, custtype;
             char mobile[15], custname[50];
-            cout << "Enter the Product ID to sell- ";
+            cout << "   Enter the Product ID to sell- ";
             cin>>id;
             for (int i = 0; i < itemcount; i++) 
             {
                 if (items[i].id == id) 
                 {
                     itemthere = true;
-                    cout << "Enter quantity to sell: ";
+                    cout << "   Enter quantity to sell: ";
                     cin >> qty;
                     if (items[i].quantity < qty) {
-                        cout << "Only "<< items[i].quantity <<  " is Available.\n";
+                        cout << "   Only "<< items[i].quantity <<  " is Available.\n";
                         return;
                     }
                     cin.ignore();
-                    cout << "Enter Customer phone number: ";
+                    cout << "   Enter Customer phone number: ";
                     cin.getline(mobile, 15);
-                    cout << "Enter Customer name: ";
+                    cout << "   Enter Customer name: ";
                     cin.getline(custname, 50);
-                    cout << "Enter customer type (1 - Mechanic, 2 - Common Customer): ";
+                    cout << "   Enter customer type (1 - Mechanic, 2 - Common Customer): ";
                     cin >> custtype;
                     while (custtype !=1 && custtype!=2)
                     {
-                        cout << "Input is invalid - Try Again: ";
+                        cout << "   Input is invalid - Try Again: ";
                         cin >> custtype;
                     }
                 
@@ -275,7 +387,7 @@ class Autospareparts
                     total_selled_cp += totcp;
                     items[i].quantity -= qty;
                     addCustomer(mobile, custname, custtype, totsp);
-                    cout << "Bill Generated! Total price: Rs. " << totsp << "\n";
+                    cout << "   Bill Generated! Total price: Rs. " << totsp << "\n";
                     cout << endl;
                     return;
                 }
@@ -284,14 +396,12 @@ class Autospareparts
             {
                 errormsg();
             }
-            
         }
-
         void loyality()
         {
-            cout << "\n----- Loyalty Points Report for Mechanics -----\n";
+            cout << "   \n----- Loyalty Points Report for Mechanics -----\n";
             bool isthere = false;
-            cout << left << setw(25) << "Customer Name"
+            cout << left <<"    "<< setw(25) << "Customer Name"
                 << setw(15) << "Mobile"
                 << setw(20) << "Type"
                 << setw(16) << "Total Spent"
@@ -308,7 +418,7 @@ class Autospareparts
             }
             if (!isthere)
             {
-                cout << "No loyal Mechanics Found !" << endl;
+                cout << "   No loyal Mechanics Found !" << endl;
             }
         }
 
@@ -316,8 +426,7 @@ class Autospareparts
         {
             cout << "\n-------- Customers Report --------\n";
 
-            // Table headers
-            cout << left << setw(25) << "Customer Name"
+            cout << left << "   " << setw(25) << "Customer Name"
                 << setw(15) << "Mobile"
                 << setw(20) << "Type"
                 << setw(16) << "Total Spent"
@@ -338,37 +447,62 @@ class Autospareparts
             float profit = total_selled_sp - total_selled_cp;
             if (profit == 0)
             {
-                cout << "Till now, NO Profit is Made!\n";
+                cout << "   Till now, NO Profit is Made!\n";
             }
             else
             {
-                cout << "Profit Earned Today: Rs. " << fixed << setprecision(2) << profit << "\n";
+                cout << "   Profit Earned Today: Rs. " << fixed << setprecision(2) << profit << "\n";
             }
         }
 
 
         void saveData() 
         {
-            ofstream fout("Items_data.csv");
-            if (!fout.is_open()) 
+            ofstream itemdata("Items_data.csv");
+            if (!itemdata.is_open()) 
             {
-                cout << "Error: Could not open file for writing.\n";
+                cout << "   Error: Could not open file Items_data.csv for writing.\n";
                 return;
             }
-            fout << "ID,Name,Brand,DealerID,Qty,CostPrice,SellPrice\n";
+
+            itemdata << "ID,Name,Brand,DealerID,Qty,CostPrice,SellPrice\n";
             for (int i = 0; i < itemcount; i++) {
-                fout << items[i].id << ","
-                    << items[i].name << ","
-                    << items[i].manufacturer << ","
-                    << items[i].dealer_id << ","
-                    << items[i].quantity << ","
-                    << fixed << setprecision(2) << items[i].costprice << ","
-                    << fixed << setprecision(2) << items[i].sellingprice
-                    << "\n";
+                itemdata << items[i].id << ","
+                        << items[i].name << ","
+                        << items[i].manufacturer << ","
+                        << items[i].dealer_id << ","
+                        << items[i].quantity << ","
+                        << fixed << setprecision(2) << items[i].costprice << ","
+                        << fixed << setprecision(2) << items[i].sellingprice
+                        << "\n";
             }
-            fout.close();
-            cout << "Data saved successfully to Items_data.csv!\n";
+            itemdata.close();
+
+            ofstream customerdata("Customer_data.csv");
+            if (!customerdata.is_open()) 
+            {
+                cout << "   Error: Could not open file Customer_data.csv for writing.\n";
+                return;
+            }
+
+            customerdata << "Name,Mobile,Type,TotalSpent,LoyalPoints,Reward\n";
+            for (int i = 0; i < customercount; i++) 
+            {
+                string custype = (customers[i].type == 1) ? "Mechanic" : "Common Customer";
+
+                customerdata << customers[i].name << ","
+                            << customers[i].mobile << ","
+                            << custype << ","
+                            << fixed << setprecision(2) << customers[i].totalspent << ","
+                            << customers[i].loyalpoints << ","
+                            << (customers[i].reward ? "1" : "0")
+                            << "\n";
+            }
+            customerdata.close();
+
+            cout << "   Data saved successfully!\n";
         }
+
 
         void runMenu()
         {
@@ -376,15 +510,16 @@ class Autospareparts
         do 
         {
             cout << "\n=============Inventory Menu============\n";
-            cout << "1. Sell Item\n";
-            cout << "2. Display All Items\n";
-            cout << "3. Add Items\n";
-            cout << "4. Show Loyality Points\n";
-            cout << "5. Show All Customers\n";
-            cout << "6. Today's Profit\n";
-            cout << "7. Save Items_data to File\n";
-            cout << "0. Exit\n";
-            cout << "Enter your choice: ";
+            cout << "   1. Sell Item\n";
+            cout << "   2. Display All Items\n";
+            cout << "   3. Add Items\n";
+            cout << "   4. Delete a Item\n";
+            cout << "   5. Show Loyality Points\n";
+            cout << "   6. Show All Customers\n";
+            cout << "   7. Today's Profit\n";
+            cout << "   8. Save Data to File\n";
+            cout << "   0. Exit\n";
+            cout << "   Enter your choice: ";
             cin >> choice;
 
             switch (choice)
@@ -392,10 +527,11 @@ class Autospareparts
             case 1: sellItems(); break;
             case 2: displayItems(); break;
             case 3: addItem(); break;
-            case 4: loyality(); break;
-            case 5: displayCustomers(); break;
-            case 6: profitcalc(); break;
-            case 7: saveData(); break;
+            case 4: deleteitem(); break;
+            case 5: loyality(); break;
+            case 6: displayCustomers(); break;
+            case 7: profitcalc(); break;
+            case 8: saveData(); break;
             case 0: cout << "Exiting!..... "; break;
             default: cout << "Invalid Input / Choice!..... "; break;
             }

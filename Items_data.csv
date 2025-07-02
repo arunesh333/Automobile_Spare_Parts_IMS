@@ -1,10 +1,10 @@
 ID,Name,Brand,DealerID,Qty,CostPrice,SellPrice
 101,Engine Oil (1L),Castrol,201,50,250.00,300.00
-102,Brake Pads (Front),Bosch,202,20,800.00,1000.00
+102,Brake Pads (Front),Bosch,202,25,800.00,1000.00
 103,Air Filter,Mahle,203,35,150.00,200.00
 104,Spark Plug (Single),NGK,204,60,120.00,180.00
-105,Battery 12V/35Ah,Exide,205,10,2400.00,2800.00
-106,Wiper Blade Set,Bosch,206,25,400.00,500.00
+105,Battery 12V/35Ah,Exide,205,15,2400.00,2800.00
+106,Wiper Blade Set,Bosch,206,5,400.00,500.00
 107,Clutch Cable,TVS,202,15,350.00,450.00
 108,Coolant (1L),Motul,201,40,180.00,230.00
 109,Headlight Bulb H4,Philips,207,70,90.00,150.00
