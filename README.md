@@ -75,13 +75,6 @@ To build a basic system that:
      ./new
 ---
 
-## License
-
-Licensed under the **MIT License** — feel free to use, modify, or distribute with attribution.  
-Please don’t claim the original work as your own.
-
----
-
 ## Author
 
 **Arunesh E**  
